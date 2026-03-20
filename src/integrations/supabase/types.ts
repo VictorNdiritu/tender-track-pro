@@ -14,16 +14,208 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      audit_log: {
+        Row: {
+          action: string
+          created_at: string
+          details: Json | null
+          entry_id: string | null
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          details?: Json | null
+          entry_id?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          details?: Json | null
+          entry_id?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_log_entry_id_fkey"
+            columns: ["entry_id"]
+            isOneToOne: false
+            referencedRelation: "procurement_entries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      entry_tasks: {
+        Row: {
+          assigned_to: string | null
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          entry_id: string
+          id: string
+          sort_order: number
+          status: Database["public"]["Enums"]["task_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          entry_id: string
+          id?: string
+          sort_order?: number
+          status?: Database["public"]["Enums"]["task_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          entry_id?: string
+          id?: string
+          sort_order?: number
+          status?: Database["public"]["Enums"]["task_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "entry_tasks_entry_id_fkey"
+            columns: ["entry_id"]
+            isOneToOne: false
+            referencedRelation: "procurement_entries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      procurement_entries: {
+        Row: {
+          ai_analysis: Json | null
+          approved_by: string | null
+          client_name: string | null
+          created_at: string
+          deadline: string | null
+          description: string | null
+          entry_type: Database["public"]["Enums"]["entry_type"]
+          estimated_value: number | null
+          id: string
+          rejection_reason: string | null
+          status: Database["public"]["Enums"]["entry_status"]
+          title: string
+          updated_at: string
+          uploaded_by: string
+        }
+        Insert: {
+          ai_analysis?: Json | null
+          approved_by?: string | null
+          client_name?: string | null
+          created_at?: string
+          deadline?: string | null
+          description?: string | null
+          entry_type: Database["public"]["Enums"]["entry_type"]
+          estimated_value?: number | null
+          id?: string
+          rejection_reason?: string | null
+          status?: Database["public"]["Enums"]["entry_status"]
+          title: string
+          updated_at?: string
+          uploaded_by: string
+        }
+        Update: {
+          ai_analysis?: Json | null
+          approved_by?: string | null
+          client_name?: string | null
+          created_at?: string
+          deadline?: string | null
+          description?: string | null
+          entry_type?: Database["public"]["Enums"]["entry_type"]
+          estimated_value?: number | null
+          id?: string
+          rejection_reason?: string | null
+          status?: Database["public"]["Enums"]["entry_status"]
+          title?: string
+          updated_at?: string
+          uploaded_by?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "manager" | "bids_officer" | "staff"
+      entry_status:
+        | "draft"
+        | "pending_approval"
+        | "approved"
+        | "rejected"
+        | "in_progress"
+        | "completed"
+      entry_type: "tender" | "prequalification"
+      task_status: "pending" | "in_progress" | "completed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +342,18 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "manager", "bids_officer", "staff"],
+      entry_status: [
+        "draft",
+        "pending_approval",
+        "approved",
+        "rejected",
+        "in_progress",
+        "completed",
+      ],
+      entry_type: ["tender", "prequalification"],
+      task_status: ["pending", "in_progress", "completed"],
+    },
   },
 } as const

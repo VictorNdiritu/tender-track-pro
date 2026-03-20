@@ -12,6 +12,7 @@ import Prequalifications from "@/pages/Prequalifications";
 import MyTasks from "@/pages/MyTasks";
 import AuditLog from "@/pages/AuditLog";
 import ManagerView from "@/pages/ManagerView";
+import BidManagerDashboard from "@/pages/BidManagerDashboard";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ function ProtectedRoutes() {
         <Route path="/tasks" element={<MyTasks />} />
         <Route path="/audit" element={<AuditLog />} />
         <Route path="/manager" element={<ManagerView />} />
+        <Route path="/bid-manager" element={<BidManagerDashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AppLayout>

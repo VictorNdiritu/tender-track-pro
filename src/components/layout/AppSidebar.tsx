@@ -12,7 +12,7 @@ const navItems = [
 ];
 
 const managerItems = [
-  { label: "Manager View", icon: User, path: "/manager" },
+  { label: "Bid Manager", icon: User, path: "/bid-manager" },
 ];
 
 export default function AppSidebar() {

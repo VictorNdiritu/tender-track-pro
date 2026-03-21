@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { label: "Dashboard", icon: LayoutDashboard, path: "/" },
+  { label: "Bids Overview", icon: Layers, path: "/" },
   { label: "Tenders", icon: FileText, path: "/tenders" },
   { label: "Prequalifications", icon: Shield, path: "/prequalifications" },
   { label: "My Tasks", icon: CheckSquare, path: "/tasks" },

@@ -14,6 +14,7 @@ import AuditLog from "@/pages/AuditLog";
 import ManagerView from "@/pages/ManagerView";
 import BidManagerDashboard from "@/pages/BidManagerDashboard";
 import NotFound from "@/pages/NotFound";
+import ResetPassword from "@/pages/ResetPassword";
 
 const queryClient = new QueryClient();
 

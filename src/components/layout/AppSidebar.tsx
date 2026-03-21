@@ -1,4 +1,4 @@
-import { ClipboardList, LayoutDashboard, FileText, Shield, CheckSquare, ScrollText, LogOut, User } from "lucide-react";
+import { ClipboardList, Layers, FileText, Shield, CheckSquare, ScrollText, LogOut, User } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";

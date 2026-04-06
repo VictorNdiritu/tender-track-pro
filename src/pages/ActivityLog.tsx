@@ -3,12 +3,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { ScrollText } from "lucide-react";
 
-export default function AuditLog() {
+export default function ActivityLog() {
   const { data: logs = [], isLoading } = useQuery({
-    queryKey: ["audit_log"],
+    queryKey: ["bid_activities"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("audit_log")
+        .from("bid_activities")
         .select("*")
         .order("created_at", { ascending: false })
         .limit(100);
@@ -17,19 +17,11 @@ export default function AuditLog() {
     },
   });
 
-  const actionLabels: Record<string, string> = {
-    entry_uploaded: "Uploaded entry",
-    entry_approved: "Approved entry",
-    entry_rejected: "Rejected entry",
-    task_completed: "Completed task",
-    task_uncompleted: "Reopened task",
-  };
-
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold" style={{ lineHeight: "1.1" }}>Audit Log</h1>
-        <p className="text-sm text-muted-foreground mt-1">Complete history of all actions</p>
+        <h1 className="text-2xl font-semibold" style={{ lineHeight: "1.1" }}>Activity Log</h1>
+        <p className="text-sm text-muted-foreground mt-1">History of all bid actions</p>
       </div>
 
       {isLoading ? (
@@ -50,13 +42,10 @@ export default function AuditLog() {
                 <div className="w-2 h-2 rounded-full bg-primary/40 mt-1.5 shrink-0" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm">
-                    <span className="font-medium">{actionLabels[log.action] || log.action}</span>
+                    <span className="font-medium capitalize">{log.action.replace(/_/g, " ")}</span>
                     {details?.title && <span className="text-muted-foreground"> — {details.title}</span>}
-                    {details?.task_title && <span className="text-muted-foreground"> — {details.task_title}</span>}
+                    {details?.from && <span className="text-muted-foreground"> ({details.from} → {details.to})</span>}
                   </p>
-                  {details?.reason && (
-                    <p className="text-xs text-destructive/70 mt-0.5">Reason: {details.reason}</p>
-                  )}
                 </div>
                 <span className="text-xs text-muted-foreground tabular-nums shrink-0">
                   {format(new Date(log.created_at), "dd MMM HH:mm")}

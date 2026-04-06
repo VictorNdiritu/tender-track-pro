@@ -50,7 +50,7 @@ export default function Auth() {
   };
 
   const title = mode === "login" ? "Welcome back" : mode === "signup" ? "Create your account" : "Reset password";
-  const description = mode === "login" ? "Sign in to your account" : mode === "signup" ? "Get started with ProcureFlow" : "We'll send you a reset link";
+  const description = mode === "login" ? "Sign in to your account" : mode === "signup" ? "Get started with BidFlow" : "We'll send you a reset link";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">

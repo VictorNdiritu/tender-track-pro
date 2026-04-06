@@ -59,7 +59,7 @@ export default function Auth() {
           <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
             <ClipboardList className="w-5 h-5 text-primary-foreground" />
           </div>
-          <span className="text-xl font-semibold text-foreground">ProcureFlow</span>
+          <span className="text-xl font-semibold text-foreground">BidFlow</span>
         </div>
 
         <Card className="shadow-lg shadow-primary/5 border-border/60">

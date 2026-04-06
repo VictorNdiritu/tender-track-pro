@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,12 +7,8 @@ import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import AppLayout from "@/components/layout/AppLayout";
 import Auth from "@/pages/Auth";
 import Dashboard from "@/pages/Dashboard";
-import Tenders from "@/pages/Tenders";
-import Prequalifications from "@/pages/Prequalifications";
-import MyTasks from "@/pages/MyTasks";
-import AuditLog from "@/pages/AuditLog";
-import ManagerView from "@/pages/ManagerView";
-import BidManagerDashboard from "@/pages/BidManagerDashboard";
+import Pipeline from "@/pages/Pipeline";
+import ActivityLog from "@/pages/ActivityLog";
 import NotFound from "@/pages/NotFound";
 import ResetPassword from "@/pages/ResetPassword";
 
@@ -35,12 +31,8 @@ function ProtectedRoutes() {
     <AppLayout>
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/tenders" element={<Tenders />} />
-        <Route path="/prequalifications" element={<Prequalifications />} />
-        <Route path="/tasks" element={<MyTasks />} />
-        <Route path="/audit" element={<AuditLog />} />
-        <Route path="/manager" element={<ManagerView />} />
-        <Route path="/bid-manager" element={<BidManagerDashboard />} />
+        <Route path="/pipeline" element={<Pipeline />} />
+        <Route path="/activity" element={<ActivityLog />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AppLayout>
